@@ -5,7 +5,8 @@ type ActivityType =
   | "onboarding_completed"
   | "profile_updated"
   | "password_changed"
-  | "generation";
+  | "generation"
+  | "image_generation";
 
 type CreateActivityInput = {
   userId: string;
@@ -38,6 +39,6 @@ export const getRecentActivities = async (userId: string, limit = 5) => {
 export const countGenerations = async (userId: string) => {
   return ActivityModel.countDocuments({
     userId,
-    type: "generation"
+    type: { $in: ["generation", "image_generation"] }
   });
 };

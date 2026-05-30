@@ -3,6 +3,7 @@
 import {
   Home,
   History,
+  Image,
   PanelLeftClose,
   PanelLeftOpen,
   Settings,
@@ -34,6 +35,11 @@ const navItems = [
     href: "/dashboard/history",
     label: "History",
     icon: History
+  },
+  {
+    href: "/dashboard/images",
+    label: "Images",
+    icon: Image
   },
   {
     href: "/dashboard/settings",

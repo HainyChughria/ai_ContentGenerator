@@ -1,7 +1,9 @@
 import { Response } from "express";
 import {
+  requestPasswordReset,
   loginUser,
   registerUser,
+  resetPassword,
   resendVerificationOtp,
   verifyEmailOtp
 } from "../services/auth.service.js";
@@ -44,5 +46,22 @@ export const resendOtp = catchAsync(async (req, res) => {
 export const getMe = catchAsync(async (req, res: Response) => {
   res.status(200).json({
     user: sanitizeUser(req.user)
+  });
+});
+
+export const forgotPassword = catchAsync(async (req, res) => {
+  await requestPasswordReset(req.body.email);
+
+  res.status(200).json({
+    message:
+      "If an account exists for that email, a password reset link has been sent."
+  });
+});
+
+export const updateForgottenPassword = catchAsync(async (req, res) => {
+  await resetPassword(req.body.email, req.body.token, req.body.password);
+
+  res.status(200).json({
+    message: "Password reset successful"
   });
 });

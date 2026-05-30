@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: ai-saas-api
+    env: node
+    rootDir: .
+    buildCommand: npm install && npm run build -w apps/api
+    startCommand: npm run start -w apps/api
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      - key: API_URL
+        sync: false
+      - key: JWT_ACCESS_SECRET
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: HF_TOKEN
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM_EMAIL
+        sync: false

@@ -39,6 +39,24 @@ export const authApi = {
     });
     return data;
   },
+  forgotPassword: async (email: string) => {
+    const { data } = await api.post<{ message: string }>(
+      "/auth/forgot-password",
+      { email }
+    );
+    return data;
+  },
+  resetPassword: async (payload: {
+    email: string;
+    token: string;
+    password: string;
+  }) => {
+    const { data } = await api.post<{ message: string }>(
+      "/auth/reset-password",
+      payload
+    );
+    return data;
+  },
   me: async () => {
     const { data } = await api.get<{ user: AuthUser }>("/auth/me");
     return data.user;

@@ -44,3 +44,23 @@ export const resendOtpValidator = [
     .withMessage("Enter a valid email address")
     .normalizeEmail()
 ];
+
+export const forgotPasswordValidator = [
+  body("email")
+    .trim()
+    .isEmail()
+    .withMessage("Enter a valid email address")
+    .normalizeEmail()
+];
+
+export const resetPasswordValidator = [
+  body("email")
+    .trim()
+    .isEmail()
+    .withMessage("Enter a valid email address")
+    .normalizeEmail(),
+  body("token").trim().isLength({ min: 32 }).withMessage("Token is invalid"),
+  body("password")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters")
+];

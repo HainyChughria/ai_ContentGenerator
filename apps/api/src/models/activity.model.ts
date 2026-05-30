@@ -14,7 +14,8 @@ const activitySchema = new mongoose.Schema(
         "onboarding_completed",
         "profile_updated",
         "password_changed",
-        "generation"
+        "generation",
+        "image_generation"
       ],
       required: true
     },

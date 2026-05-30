@@ -20,6 +20,12 @@ type AuthState = {
   login: (payload: LoginPayload) => Promise<void>;
   verifyEmail: (payload: VerifyEmailPayload) => Promise<AuthUser>;
   resendOtp: (email: string) => Promise<void>;
+  forgotPassword: (email: string) => Promise<string>;
+  resetPassword: (payload: {
+    email: string;
+    token: string;
+    password: string;
+  }) => Promise<string>;
   fetchMe: () => Promise<void>;
   logout: () => void;
 };
@@ -66,6 +72,24 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true });
         try {
           await authApi.resendOtp(email);
+        } finally {
+          set({ isLoading: false });
+        }
+      },
+      forgotPassword: async (email) => {
+        set({ isLoading: true });
+        try {
+          const response = await authApi.forgotPassword(email);
+          return response.message;
+        } finally {
+          set({ isLoading: false });
+        }
+      },
+      resetPassword: async (payload) => {
+        set({ isLoading: true });
+        try {
+          const response = await authApi.resetPassword(payload);
+          return response.message;
         } finally {
           set({ isLoading: false });
         }

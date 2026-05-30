@@ -80,6 +80,14 @@ export default function LoginPage() {
           {isLoading ? "Signing in..." : "Sign in"}
         </Button>
       </form>
+      <p className="mt-4 text-center text-sm">
+        <Link
+          className="font-medium text-foreground underline"
+          href="/forgot-password"
+        >
+          Forgot password?
+        </Link>
+      </p>
       <p className="mt-6 text-center text-sm text-muted-foreground">
         New here?{" "}
         <Link className="font-medium text-foreground underline" href="/register">

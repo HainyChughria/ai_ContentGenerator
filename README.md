@@ -3,6 +3,8 @@
 Phase 1 is a production-grade authentication foundation for a modular AI SaaS.
 Phase 2 adds the protected dashboard shell, onboarding wizard, dashboard metrics, activity, and profile settings.
 Phase 3 adds Groq-powered AI text generation, streaming responses, credits, history, and provider abstraction.
+Phase 4 adds HuggingFace image generation, Cloudinary storage, and an image gallery.
+Phase 5 adds forgot password, security hardening, deployment config, and a production checklist.
 
 ## Architecture
 
@@ -22,7 +24,12 @@ packages/
 /dashboard/settings     Profile and password settings
 /dashboard/generate     AI text generator
 /dashboard/history      Generation history
+/dashboard/images       AI image generation and gallery
 ```
+
+## Production Docs
+
+- `docs/phase-5-production-deployment.md`
 
 ## JWT Flow
 
