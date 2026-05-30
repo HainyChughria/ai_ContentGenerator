@@ -1,6 +1,8 @@
 # AI SaaS Platform
 
 Phase 1 is a production-grade authentication foundation for a modular AI SaaS.
+Phase 2 adds the protected dashboard shell, onboarding wizard, dashboard metrics, activity, and profile settings.
+Phase 3 adds Groq-powered AI text generation, streaming responses, credits, history, and provider abstraction.
 
 ## Architecture
 
@@ -10,6 +12,16 @@ apps/
   web/    Next.js App Router + Zustand + Axios + Tailwind
 packages/
   shared/ Shared TypeScript auth contracts
+```
+
+## Dashboard Routes
+
+```text
+/dashboard              Dashboard home
+/dashboard/onboarding   Multi-step onboarding wizard
+/dashboard/settings     Profile and password settings
+/dashboard/generate     AI text generator
+/dashboard/history      Generation history
 ```
 
 ## JWT Flow

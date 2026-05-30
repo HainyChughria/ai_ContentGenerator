@@ -39,6 +39,25 @@ const userSchema = new mongoose.Schema(
     otpExpiry: {
       type: Date,
       select: false
+    },
+    onboarding: {
+      businessName: {
+        type: String,
+        trim: true,
+        maxlength: 120
+      },
+      niche: {
+        type: String,
+        trim: true,
+        maxlength: 120
+      },
+      contentGoals: {
+        type: [String],
+        default: []
+      },
+      completedAt: {
+        type: Date
+      }
     }
   },
   {

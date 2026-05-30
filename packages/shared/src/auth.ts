@@ -4,6 +4,13 @@ export type AuthUser = {
   email: string;
   credits: number;
   isVerified: boolean;
+  onboarding: {
+    businessName: string;
+    niche: string;
+    contentGoals: string[];
+    completedAt: string | null;
+    isCompleted: boolean;
+  };
   createdAt: string;
 };
 

@@ -6,6 +6,7 @@ const requiredEnv = [
   "MONGODB_URI",
   "CLIENT_URL",
   "JWT_ACCESS_SECRET",
+  "GROQ_API_KEY",
   "RESEND_API_KEY",
   "RESEND_FROM_EMAIL"
 ] as const;
@@ -23,6 +24,8 @@ export const env = {
   clientUrl: process.env.CLIENT_URL as string,
   jwtAccessSecret: process.env.JWT_ACCESS_SECRET as string,
   jwtAccessExpiresIn: process.env.JWT_ACCESS_EXPIRES_IN ?? "15m",
+  groqApiKey: process.env.GROQ_API_KEY as string,
+  groqModel: process.env.GROQ_MODEL ?? "llama-3.3-70b-versatile",
   resendApiKey: process.env.RESEND_API_KEY as string,
   resendFromEmail: process.env.RESEND_FROM_EMAIL as string
 };

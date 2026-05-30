@@ -15,6 +15,7 @@ type AuthState = {
   user: AuthUser | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  setUser: (user: AuthUser) => void;
   register: (payload: RegisterPayload) => Promise<AuthUser>;
   login: (payload: LoginPayload) => Promise<void>;
   verifyEmail: (payload: VerifyEmailPayload) => Promise<AuthUser>;
@@ -29,6 +30,7 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       isAuthenticated: false,
       isLoading: false,
+      setUser: (user) => set({ user }),
       register: async (payload) => {
         set({ isLoading: true });
         try {

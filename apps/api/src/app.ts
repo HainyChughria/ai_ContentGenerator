@@ -4,6 +4,10 @@ import { env } from "./config/env.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
 import { notFoundHandler } from "./middlewares/not-found.middleware.js";
 import { authRoutes } from "./routes/auth.routes.js";
+import { contentRoutes } from "./routes/content.routes.js";
+import { dashboardRoutes } from "./routes/dashboard.routes.js";
+import { onboardingRoutes } from "./routes/onboarding.routes.js";
+import { userRoutes } from "./routes/user.routes.js";
 
 export const app = express();
 
@@ -20,6 +24,10 @@ app.get("/health", (_req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/content", contentRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/onboarding", onboardingRoutes);
+app.use("/api/user", userRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
