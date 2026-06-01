@@ -57,7 +57,7 @@ export default function LoginPage() {
   return (
     <AuthShell
       title="Welcome back"
-      subtitle="Sign in to continue building with your AI SaaS account."
+      subtitle="Sign in to your business content workspace."
     >
       <form className="space-y-4" onSubmit={onSubmit}>
         <div className="space-y-2">

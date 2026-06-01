@@ -1,4 +1,10 @@
-export type ContentType = "blog" | "linkedin" | "twitter" | "instagram";
+export type ContentType =
+  | "blog"
+  | "linkedin"
+  | "twitter"
+  | "instagram"
+  | "email"
+  | "ad";
 
 export type GeneratedContent = {
   id: string;
@@ -12,5 +18,5 @@ export type GeneratedContent = {
 export type GenerateContentPayload = {
   contentType: ContentType;
   tone: string;
-  prompt: string;
+  request: string;
 };

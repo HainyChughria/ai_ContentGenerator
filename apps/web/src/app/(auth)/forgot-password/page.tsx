@@ -50,7 +50,7 @@ export default function ForgotPasswordPage() {
   return (
     <AuthShell
       title="Reset password"
-      subtitle="Enter your email and we will send a secure reset link."
+      subtitle="Enter your workspace email and we will send a secure reset link."
     >
       <form className="space-y-4" onSubmit={onSubmit}>
         <div className="space-y-2">

@@ -59,7 +59,7 @@ export default function RegisterPage() {
   return (
     <AuthShell
       title="Create your account"
-      subtitle="Start with verified email auth and initial platform credits."
+      subtitle="Start with verified email auth, onboarding, and initial generation credits."
     >
       <form className="space-y-4" onSubmit={onSubmit}>
         <div className="space-y-2">

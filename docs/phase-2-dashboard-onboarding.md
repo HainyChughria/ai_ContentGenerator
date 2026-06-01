@@ -44,7 +44,7 @@ request
   -> response
 ```
 
-Onboarding is stored on the user document because it is core account setup. Activity is stored in a separate collection because it can grow over time.
+Onboarding is stored on the user document because it is core account setup. It now acts as the workspace's brand context: business name, niche, audience, offer, brand voice, website, social handles, and content goals. Activity is stored in a separate collection because it can grow over time.
 
 ## Scalable SaaS UI Architecture
 
@@ -57,4 +57,13 @@ store/*-store.ts      state per feature
 app/dashboard/*       route-level pages
 ```
 
-This structure supports future pages like billing, AI tools, generation history, and team settings without crowding one folder or one file.
+This structure supports future pages like billing, AI tools, generation history, and team settings without crowding one folder or one file. The current SaaS flow is:
+
+```text
+Register/login
+  -> Complete brand onboarding
+  -> Open generator sandbox
+  -> Choose content format and tone
+  -> Ask what to generate
+  -> Backend injects saved onboarding context
+```

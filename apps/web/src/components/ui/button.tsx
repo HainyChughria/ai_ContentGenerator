@@ -15,11 +15,11 @@ export function Button({
     <button
       type={type}
       className={cn(
-        "inline-flex h-10 items-center justify-center rounded-md px-4 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex h-10 items-center justify-center rounded-md px-4 text-sm font-medium transition-all hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-50 disabled:hover:translate-y-0",
         variant === "primary" &&
-          "bg-primary text-primary-foreground hover:bg-primary/90",
+          "bg-[#d7a6ff] text-[#1c1024] shadow-sm hover:bg-[#e2bfff] hover:shadow-md",
         variant === "secondary" &&
-          "border bg-background text-foreground hover:bg-muted",
+          "border border-[#2b2a31] bg-[#1c1b1f] text-[#f1eef4] shadow-sm hover:bg-[#25242a]",
         className
       )}
       {...props}

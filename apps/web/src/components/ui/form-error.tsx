@@ -7,5 +7,5 @@ export function FormError({ message }: FormErrorProps) {
     return null;
   }
 
-  return <p className="text-sm text-destructive">{message}</p>;
+  return <p className="text-sm text-red-300">{message}</p>;
 }

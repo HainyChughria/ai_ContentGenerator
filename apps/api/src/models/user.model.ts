@@ -59,6 +59,46 @@ const userSchema = new mongoose.Schema(
         trim: true,
         maxlength: 120
       },
+      audience: {
+        type: String,
+        trim: true,
+        maxlength: 180
+      },
+      offer: {
+        type: String,
+        trim: true,
+        maxlength: 240
+      },
+      brandVoice: {
+        type: String,
+        trim: true,
+        maxlength: 120
+      },
+      website: {
+        type: String,
+        trim: true,
+        maxlength: 180
+      },
+      socialHandles: {
+        linkedin: {
+          type: String,
+          trim: true,
+          maxlength: 120,
+          default: ""
+        },
+        twitter: {
+          type: String,
+          trim: true,
+          maxlength: 120,
+          default: ""
+        },
+        instagram: {
+          type: String,
+          trim: true,
+          maxlength: 120,
+          default: ""
+        }
+      },
       contentGoals: {
         type: [String],
         default: []

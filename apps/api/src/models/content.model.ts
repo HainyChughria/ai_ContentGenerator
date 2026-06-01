@@ -10,7 +10,7 @@ const contentSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["blog", "linkedin", "twitter", "instagram"],
+      enum: ["blog", "linkedin", "twitter", "instagram", "email", "ad"],
       required: true
     },
     prompt: {

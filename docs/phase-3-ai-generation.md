@@ -5,10 +5,11 @@
 The generator uses Server-Sent Events over a normal authenticated POST request.
 
 ```text
-Browser form submit
+Browser sandbox submit
   -> fetch POST /api/content/generate
   -> Express validates request and opens text/event-stream
-  -> content service checks credits
+  -> content service checks credits and completed onboarding
+  -> content service builds prompt from saved brand context
   -> provider streams chunks from Groq
   -> Express writes each chunk as an SSE event
   -> browser reads the stream with ReadableStream
@@ -35,12 +36,13 @@ content.service.ts
 
 Only `GroqTextProvider` knows about `groq-sdk`. Future providers can implement the same `streamText` method for OpenAI, Claude, or HuggingFace without changing controllers or frontend code.
 
-## Prompt Engineering
+## Context Engineering
 
 Prompt templates live in `apps/api/src/ai/prompts`. The template separates:
 
 - system instruction: stable behavior, safety, quality rules, content format
-- user prompt: the user-specific request
+- saved onboarding context: business, niche, audience, offer, brand voice, website, social handles, and goals
+- user request: the short asset the user wants generated
 - dynamic options: content type and tone
 
 This is more maintainable than building prompts inside route handlers.
@@ -58,7 +60,7 @@ Later, replace this with provider-reported usage when available or add a tokeniz
 ## Credit Flow
 
 ```text
-check credits before generation
+check credits and onboarding before generation
   -> stream content
   -> save Content document
   -> deduct one credit

@@ -6,6 +6,15 @@ import { createActivity } from "./activity.service.js";
 type OnboardingInput = {
   businessName: string;
   niche: string;
+  audience: string;
+  offer: string;
+  brandVoice: string;
+  website?: string;
+  socialHandles?: {
+    linkedin?: string;
+    twitter?: string;
+    instagram?: string;
+  };
   contentGoals: string[];
 };
 
@@ -21,7 +30,16 @@ export const getOnboarding = async (userId: string) => {
 
 export const saveOnboarding = async (
   userId: string,
-  { businessName, niche, contentGoals }: OnboardingInput
+  {
+    businessName,
+    niche,
+    audience,
+    offer,
+    brandVoice,
+    website = "",
+    socialHandles,
+    contentGoals
+  }: OnboardingInput
 ) => {
   const user = await UserModel.findByIdAndUpdate(
     userId,
@@ -29,6 +47,15 @@ export const saveOnboarding = async (
       onboarding: {
         businessName,
         niche,
+        audience,
+        offer,
+        brandVoice,
+        website,
+        socialHandles: {
+          linkedin: socialHandles?.linkedin ?? "",
+          twitter: socialHandles?.twitter ?? "",
+          instagram: socialHandles?.instagram ?? ""
+        },
         contentGoals,
         completedAt: new Date()
       }
@@ -46,7 +73,8 @@ export const saveOnboarding = async (
     title: "Completed onboarding",
     metadata: {
       businessName,
-      niche
+      niche,
+      audience
     }
   });
 

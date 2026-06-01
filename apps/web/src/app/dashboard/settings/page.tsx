@@ -4,7 +4,6 @@ import axios from "axios";
 import { FormEvent, useState } from "react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { FormError } from "@/components/ui/form-error";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -50,12 +49,11 @@ export default function SettingsPage() {
       setUser(updatedUser);
       setProfileMessage("Profile updated");
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        setProfileError(error.response?.data?.message ?? "Could not update");
-        return;
-      }
-
-      setProfileError("Could not update");
+      setProfileError(
+        axios.isAxiosError(error)
+          ? error.response?.data?.message ?? "Could not update"
+          : "Could not update"
+      );
     } finally {
       setIsProfileSaving(false);
     }
@@ -87,85 +85,89 @@ export default function SettingsPage() {
       form.reset();
       setPasswordMessage("Password changed");
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        setPasswordError(
-          error.response?.data?.message ?? "Could not change password"
-        );
-        return;
-      }
-
-      setPasswordError("Could not change password");
+      setPasswordError(
+        axios.isAxiosError(error)
+          ? error.response?.data?.message ?? "Could not change password"
+          : "Could not change password"
+      );
     } finally {
       setIsPasswordSaving(false);
     }
   };
 
   return (
-    <div className="max-w-3xl space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold">Settings</h1>
-        <p className="text-sm text-muted-foreground">
-          Manage your account profile and password.
+    <div className="min-h-[calc(100vh-70px)] px-5 py-8 xl:px-[42px]">
+      <div className="mb-8">
+        <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-[#d7a6ff]">
+          Settings
+        </p>
+        <h1 className="mt-3 text-[34px] font-black tracking-[-0.055em] text-[#f4f1f6]">
+          Account controls
+        </h1>
+        <p className="mt-3 text-sm leading-6 text-[#9b95a0]">
+          Manage your profile, password, and business workspace identity.
         </p>
       </div>
 
-      <Card>
-        <form className="space-y-4" onSubmit={updateProfile}>
-          <div>
-            <h2 className="text-lg font-semibold">Profile</h2>
-            <p className="text-sm text-muted-foreground">
-              This name appears across your workspace.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" name="name" defaultValue={user?.name ?? ""} />
-          </div>
-          <FormError message={profileError} />
-          {profileMessage ? (
-            <p className="text-sm text-emerald-700">{profileMessage}</p>
-          ) : null}
-          <Button type="submit" disabled={isProfileSaving}>
-            {isProfileSaving ? "Saving..." : "Save profile"}
-          </Button>
-        </form>
-      </Card>
+      <div className="grid gap-6 xl:grid-cols-2">
+        <section className="rounded-[5px] border border-[#2b2a31] bg-[#1c1b1f] p-5">
+          <form className="space-y-5" onSubmit={updateProfile}>
+            <div>
+              <h2 className="text-[20px] font-black text-[#f0edf2]">Profile</h2>
+              <p className="mt-2 text-sm text-[#8e8793]">
+                This name appears across your workspace.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" name="name" defaultValue={user?.name ?? ""} />
+            </div>
+            <FormError message={profileError} />
+            {profileMessage ? (
+              <p className="text-sm text-emerald-300">{profileMessage}</p>
+            ) : null}
+            <Button type="submit" disabled={isProfileSaving}>
+              {isProfileSaving ? "Saving..." : "Save profile"}
+            </Button>
+          </form>
+        </section>
 
-      <Card>
-        <form className="space-y-4" onSubmit={changePassword}>
-          <div>
-            <h2 className="text-lg font-semibold">Password</h2>
-            <p className="text-sm text-muted-foreground">
-              Use a strong password with at least 8 characters.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="currentPassword">Current password</Label>
-            <Input
-              id="currentPassword"
-              name="currentPassword"
-              type="password"
-              autoComplete="current-password"
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="newPassword">New password</Label>
-            <Input
-              id="newPassword"
-              name="newPassword"
-              type="password"
-              autoComplete="new-password"
-            />
-          </div>
-          <FormError message={passwordError} />
-          {passwordMessage ? (
-            <p className="text-sm text-emerald-700">{passwordMessage}</p>
-          ) : null}
-          <Button type="submit" disabled={isPasswordSaving}>
-            {isPasswordSaving ? "Changing..." : "Change password"}
-          </Button>
-        </form>
-      </Card>
+        <section className="rounded-[5px] border border-[#2b2a31] bg-[#1c1b1f] p-5">
+          <form className="space-y-5" onSubmit={changePassword}>
+            <div>
+              <h2 className="text-[20px] font-black text-[#f0edf2]">Password</h2>
+              <p className="mt-2 text-sm text-[#8e8793]">
+                Use a strong password with at least 8 characters.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="currentPassword">Current password</Label>
+              <Input
+                id="currentPassword"
+                name="currentPassword"
+                type="password"
+                autoComplete="current-password"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="newPassword">New password</Label>
+              <Input
+                id="newPassword"
+                name="newPassword"
+                type="password"
+                autoComplete="new-password"
+              />
+            </div>
+            <FormError message={passwordError} />
+            {passwordMessage ? (
+              <p className="text-sm text-emerald-300">{passwordMessage}</p>
+            ) : null}
+            <Button type="submit" disabled={isPasswordSaving}>
+              {isPasswordSaving ? "Changing..." : "Change password"}
+            </Button>
+          </form>
+        </section>
+      </div>
     </div>
   );
 }

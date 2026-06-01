@@ -58,8 +58,28 @@ export const streamGeneratedContent = async function* (
     throw new AppError("Not enough credits to generate content", 402);
   }
 
+  if (!user.onboarding?.completedAt) {
+    throw new AppError("Complete onboarding before generating content", 409);
+  }
+
   const provider = createTextProvider();
-  const messages = buildContentPrompt(input);
+  const messages = buildContentPrompt({
+    ...input,
+    businessContext: {
+      businessName: user.onboarding.businessName ?? "",
+      niche: user.onboarding.niche ?? "",
+      audience: user.onboarding.audience ?? "",
+      offer: user.onboarding.offer ?? "",
+      brandVoice: user.onboarding.brandVoice ?? "",
+      website: user.onboarding.website ?? "",
+      socialHandles: {
+        linkedin: user.onboarding.socialHandles?.linkedin ?? "",
+        twitter: user.onboarding.socialHandles?.twitter ?? "",
+        instagram: user.onboarding.socialHandles?.instagram ?? ""
+      },
+      contentGoals: user.onboarding.contentGoals ?? []
+    }
+  });
   let result = "";
 
   for await (const chunk of provider.streamText({
@@ -76,12 +96,12 @@ export const streamGeneratedContent = async function* (
     };
   }
 
-  const tokensUsed = estimateTokens(`${input.prompt} ${result}`);
+  const tokensUsed = estimateTokens(`${input.request} ${result}`);
 
   const content = await ContentModel.create({
     userId,
     type: input.contentType,
-    prompt: input.prompt,
+    prompt: input.request,
     result,
     tokensUsed
   });

@@ -1,11 +1,12 @@
 "use client";
 
 import {
-  Home,
   History,
   Image,
+  LayoutDashboard,
   PanelLeftClose,
   PanelLeftOpen,
+  PenLine,
   Settings,
   Sparkles,
   X
@@ -19,17 +20,17 @@ const navItems = [
   {
     href: "/dashboard",
     label: "Home",
-    icon: Home
+    icon: LayoutDashboard
   },
   {
     href: "/dashboard/onboarding",
-    label: "Onboarding",
+    label: "Setup",
     icon: Sparkles
   },
   {
     href: "/dashboard/generate",
-    label: "AI Generator",
-    icon: Sparkles
+    label: "Generate",
+    icon: PenLine
   },
   {
     href: "/dashboard/history",
@@ -69,7 +70,7 @@ export function DashboardSidebar() {
       ) : null}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 flex border-r bg-background transition-all lg:sticky lg:top-0 lg:z-0",
+          "fixed inset-y-0 left-0 z-40 flex border-r bg-background/95 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 lg:sticky lg:top-0 lg:z-0 lg:shadow-none",
           isSidebarCollapsed ? "w-20" : "w-72",
           isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
@@ -84,10 +85,10 @@ export function DashboardSidebar() {
               href="/dashboard"
               onClick={closeMobileSidebar}
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                AI
+              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-sm text-primary-foreground shadow-sm">
+                CG
               </span>
-              {!isSidebarCollapsed ? <span>AI SaaS</span> : null}
+              {!isSidebarCollapsed ? <span>Content OS</span> : null}
             </Link>
             <button
               aria-label="Close sidebar"
@@ -110,8 +111,8 @@ export function DashboardSidebar() {
                 <Link
                   key={item.href}
                   className={cn(
-                    "flex h-10 items-center gap-3 rounded-md px-3 text-sm font-medium transition-colors hover:bg-muted",
-                    isActive && "bg-muted text-foreground",
+                    "flex h-10 items-center gap-3 rounded-md px-3 text-sm font-medium text-muted-foreground transition-all hover:bg-muted hover:text-foreground",
+                    isActive && "bg-primary/10 text-primary",
                     isSidebarCollapsed && "justify-center px-0"
                   )}
                   href={item.href}

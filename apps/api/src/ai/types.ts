@@ -1,9 +1,15 @@
-export type ContentType = "blog" | "linkedin" | "twitter" | "instagram";
+export type ContentType =
+  | "blog"
+  | "linkedin"
+  | "twitter"
+  | "instagram"
+  | "email"
+  | "ad";
 
 export type GenerateTextInput = {
   contentType: ContentType;
   tone: string;
-  prompt: string;
+  request: string;
 };
 
 export type AiMessage = {
